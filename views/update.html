@@ -1,0 +1,13 @@
+<div ng-controller="UpdateController">
+ <form ng-submit="updateProduct(key)">
+    <input type="hidden" ng-model="_id">
+      <label for="">title</label>
+      <input type="text" ng-model="ProductTitle"  mg-model-options="{updateOn: 'blur'}"/><br />
+      <label for="">price</label><input type="text"  ng-model="ProductPrice" require ng-pattern="/[0-9]*.[0-9][0-9]/i"><br />
+      <label for="">description</label><textarea ng-model="ProductDescription"  cols="30" rows="10"></textarea>
+      <br />
+      <button>Upload image</button>
+      <input type="file" />
+      <button type="submit" ng-click="auth.caseShow='list'">Update Product</button> 
+ </form>
+</div>
