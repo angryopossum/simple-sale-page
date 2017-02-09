@@ -1,6 +1,10 @@
 (function(){
  
-  app.controller("NewController", function($scope, $location,$rootScope) {
+  angular
+    .module('saleApp')
+    .controller("NewController", NewController);
+
+  function NewController($scope, $location,$rootScope) {
   
   if ($scope.isauth())
    {
@@ -23,7 +27,7 @@
      $location.path('/login');
     }
  
-  });
+  };
 
 
 

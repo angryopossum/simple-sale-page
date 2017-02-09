@@ -1,6 +1,11 @@
 (function(){
   
-  app.controller("UpdateController", function($scope, $location) {
+  angular
+    .module('saleApp')
+    .controller("UpdateController", UpdateController);
+
+
+  function UpdateController($scope, $location) {
   
   if ($scope.isauth())
    {
@@ -19,6 +24,6 @@
      $location.path('/login');
     }
 
-  });
+  };
   
 })();

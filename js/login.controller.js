@@ -1,6 +1,9 @@
 (function(){
-	
-  app.controller("LoginController", function($scope, $location) {
+  angular
+    .module('saleApp')
+    .controller("LoginController", LoginController);
+ 
+  function LoginController($scope, $location) {
   
    if (!$scope.isauth())
    {
@@ -10,6 +13,6 @@
    {
      $location.path('/');
     }
-  });
+  };
 
 })();

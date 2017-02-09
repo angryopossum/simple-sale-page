@@ -1,6 +1,9 @@
 (function(){
+  angular
+    .module('saleApp')
+    .controller("MainController", MainController);
 
-  app.controller("MainController", function($scope, $firebaseArray, $firebaseAuth, $location) {
+  function MainController($scope, $firebaseArray, $firebaseAuth, $location) {
 
     var database = firebase.database();
     var ref = firebase.database().ref().child("products");
@@ -114,7 +117,7 @@
     }
 
 
-  });
+  };
 
 
 })();
