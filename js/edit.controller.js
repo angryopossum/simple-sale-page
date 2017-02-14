@@ -13,6 +13,7 @@
          $rootScope.ProductTitle = $scope.products[key].title; 
          $rootScope.ProductPrice = $scope.products[key].price; 
          $rootScope.ProductDescription = $scope.products[key].description; 
+         $rootScope.ImageUrl = $scope.products[key].imageUrl; 
          $location.path('/update');
       };   }
     else

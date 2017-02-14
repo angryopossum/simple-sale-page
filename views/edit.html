@@ -1,22 +1,28 @@
 <div ng-controller="EditController">
- <table border="1">
-    <tr >
-      <td>number</td>
-      <td>title</td>
-      <td>price</td>
-      <td>image</td>
-      <td>edit</td>    
-      <td>delete</td>
-     </tr>
+ <div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <table class="table table-striped">
      <tr ng-repeat="(key, product) in products">
        <td>{{$index+1}}</td>
        <td>{{product.title}}</td>
        <td>{{product.price | currency}}</td>
-       <td><img ng-src="{{product.imageUrl}}" width=50 /></td>
-       <td><button ng-click="editProduct(key)">edit</button></td>
-       <td><button ng-click="products.$remove(product)">Delete Product</button></td>
+       <td><img ng-src="{{product.imageUrl}}" width="50" /></td>
+       <td>
+          <a ng-href="#/update" ng-click="editProduct(key)">
+            <span class="glyphicon glyphicon-edit" style="font-size:20px;" >
+                  </span>
+                </a>
+          </td>
+       <td><a href="#/edit" alt="delete" ng-click="products.$remove(product)">
+                     <span class="glyphicon glyphicon-remove" style="font-size:20px;"></span>
+                    </a></td>
      </tr>
  </table>
  <a href="#/new">new</a>
+</div>
+<div class="col-md-2"></div>
+ 
+</div>
 </div>
 

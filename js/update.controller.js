@@ -14,10 +14,19 @@
         $scope.products[key].price = $scope.ProductPrice;
         $scope.products[key].title = $scope.ProductTitle; 
         $scope.products[key].description = $scope.ProductDescription;
-        $scope.products.$save(key);
-        $location.path('/edit');  
-    };    
+     
+        if ($scope.file){
+          $scope.uploadFile($scope.file); 
+          $scope.deleteStorageFile($scope.products[key].imageUrl);
+          $scope.products[key].imageUrl = "https://firebasestorage.googleapis.com/v0/b/"+config.storageBucket+"/o/images%2F"+$scope.file.name+"?alt=media";
 
+        }
+        $scope.products.$save(key);
+         $location.path('/edit'); 
+    };
+   
+       
+    
    }
   else
    {

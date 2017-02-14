@@ -3,15 +3,60 @@
     .module('saleApp')
     .controller("MainController", MainController);
 
-  function MainController($scope, $firebaseArray, $firebaseAuth, $location) {
+  function MainController($scope, $firebaseArray, $firebaseAuth, $location,$rootScope, $cookies) {
 
     var database = firebase.database();
     var ref = firebase.database().ref().child("products");
-    $scope.products = $firebaseArray(ref);
     $scope.authObj = $firebaseAuth();
-  
+    $scope.isauth = isauth;
+    $scope.login = login;
+    $scope.logout = logout; 
+    $scope.products = $firebaseArray(ref);
+    $scope.uploadFile = uploadFile;
 
-    $scope.isauth = function(){
+    $scope.user = $cookies.get("user");
+
+    $scope.deleteStorageFile = deleteStorageFile;
+   
+
+    function deleteStorageFile (link){
+      var file = link.split("/")[7].split("?")[0].split("%2F")[1];
+      var storageRef = firebase.storage().ref();
+      var deleteFileRef = storageRef.child('images/'+ file);
+   
+      deleteFileRef.delete().then(function(){
+        console.log("File deleted successfully");
+      }
+        ).catch(function (error){
+          console.error("File deleted error occured!" + error);
+        });  
+
+
+
+      console.log(deleteFileRef);
+    };
+
+
+
+
+
+     authData = $scope.authObj.$getAuth();
+     $scope.authData = authData;
+        
+
+    if (authData) {
+       console.log("Logged in as:", authData.email);
+       
+        } else {
+          console.log("Logged out");
+         
+        } 
+
+
+
+
+
+    function isauth(){
         var isauth = $scope.authObj.$getAuth();
         if (isauth){
           return true;
@@ -21,25 +66,22 @@
         
     };
 
+   
+   
+
+
+
   
   // Login
-  $scope.login = function(email,password){
+    function login(email,password){
         
     $scope.authObj.$signInWithEmailAndPassword(email, password).then(function(firebaseUser) {
-    console.log("Signed in as:", firebaseUser.uid);
-    console.log("Signed in as:", firebaseUser.email);
-    $location.path('/');    
-
-   //    authData = $scope.authObj.$getAuth();
-
-    /*$scope.authData = authData;
-           
-
-    if (authData) {
-      console.log("Logged in as:", authData.email);
-        } else {
-          console.log("Logged out");
-        } */
+      console.log("Signed in as:", firebaseUser.uid);
+      console.log("Signed in as:", firebaseUser.email);
+      $cookies.put("user", firebaseUser.email);
+      $scope.user = $cookies.get("user");
+      $scope.status = "logout";
+      $location.path('/');    
 
         }).catch(function(error) {
          console.error("Authentication failed:", error);
@@ -47,19 +89,22 @@
       };
 
     //Logout
-     $scope.logout = function(){
+    function logout(){
         
          $scope.authObj.$signOut().then(function() {
             console.log("Signed out");
-            $scope.authData = undefined;
+            $scope.user = undefined;
+            $cookies.remove("user")
+            $scope.status = "login";
+            $location.path('/login');  
          }, function(error) {
             console.log("Error signing out:", error);  
          });
 
-      };
+  };
 
     //Upload file
-    $scope.uploadFile = function (file) {
+    function uploadFile(file) {
 
       var storageRef = firebase.storage().ref();
       var imagesRef = storageRef.child('images');
@@ -111,7 +156,7 @@
           console.log("++++" + downloadURL);
           var newimg = document.createElement("img");
           newimg.src = downloadURL;
-          document.getElementById("img").appendChild(newimg);
+         
       });
 
     }

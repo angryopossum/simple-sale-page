@@ -1,7 +1,40 @@
-<table border="1">
-  <tr ng-repeat="product in products">
+<div class="row">
+ <div class="col-md-2"></div>
+ <div class="col-md-8">
+  <table class="table table-striped" id="top">
+   <tr ng-repeat="product in products">
         <td>{{$index+1}}</td>
-        <td> {{product.title}}</td>
-        <td> {{product.price}}</td>
-      </tr>
-</table>
+        <td><a ng-href="#/#id{{$index+1}}">{{product.title}}</a></td>
+        <td><img src="images/tag.png" alt="" height="20" /><strong>{{product.price | currency}}</strong></td>
+    </tr>
+  </table>
+ </div>
+ <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+	<div class="col-md-2"></div>
+		<div class="col-md-8">
+          <div ng-repeat="product in products">
+           <h3 id="id{{$index+1}}">
+          	{{$index+1}}.{{product.title}}
+          	<img src="images/tag.png" alt="" height="30" />
+          	<strong>{{product.price | currency}}</strong>
+          	<a ng-click="scroll(0,0)"><span class="glyphicon glyphicon-hand-up" style="font-size:20px;"></span></a>
+           </h3>
+          <img ng-src="{{product.imageUrl}}" alt="">
+          <div ng-bind-html="product.description | markdown"></div>
+          <br><br>
+        </div>
+    </div>
+
+  <div class="col-md-2" ></div>
+</div>
+
+
+
+<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8"><p class="text-center"><img src="images/barcode.png" alt=""></p></div>
+		<div class="col-md-2"></div>
+</div>

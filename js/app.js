@@ -7,7 +7,7 @@ var config = {
     };
     firebase.initializeApp(config);
 
-var app = angular.module('saleApp', ["ngRoute","firebase"])
+var app = angular.module('saleApp', ["ngRoute","firebase","ngCookies"])
     .config(['$routeProvider',function($routeProvider){
         $routeProvider.when('/',
         {
@@ -44,5 +44,12 @@ app.directive("ngModelFile", function(){
   }
 });
 
+//var Showdown  = require('showdown');
 
-
+app.filter('markdown', function ($sce) {
+    var converter = new Showdown.converter();
+    return function (value) {
+    var html = converter.makeHtml(value || '');
+        return $sce.trustAsHtml(html);
+    };
+});

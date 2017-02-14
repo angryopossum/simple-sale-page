@@ -1,13 +1,42 @@
 <div ng-controller="UpdateController">
- <form ng-submit="updateProduct(key)">
-    <input type="hidden" ng-model="_id">
-      <label for="">title</label>
-      <input type="text" ng-model="ProductTitle"  mg-model-options="{updateOn: 'blur'}"/><br />
-      <label for="">price</label><input type="text"  ng-model="ProductPrice" require ng-pattern="/[0-9]*.[0-9][0-9]/i"><br />
-      <label for="">description</label><textarea ng-model="ProductDescription"  cols="30" rows="10"></textarea>
-      <br />
-      <button>Upload image</button>
-      <input type="file" />
-      <button type="submit" ng-click="auth.caseShow='list'">Update Product</button> 
- </form>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+     
+    <form class="form-horizontal" ng-submit="updateProduct(key)">
+       <div class="form-group">
+         <label  class="col-sm-2 control-label">Title</label>
+         <div class="col-sm-10">
+           <input type="text" ng-model="ProductTitle" class="form-control"  placeholder="Title" />
+         </div>
+       </div>
+       <div class="form-group">
+         <label class="col-sm-2 control-label">Price</label>
+         <div class="col-sm-10">
+           <input type="text"  ng-model="ProductPrice" class="form-control"  placeholder="Price" />
+         </div>
+       </div>
+       <div class="form-group">
+         <label  class="col-sm-2 control-label">Description</label>
+         <div class="col-sm-10">
+           <textarea ng-model="ProductDescription" class="form-control"></textarea>
+         </div>
+       </div>
+       <div class="form-group">
+         <label  class="col-sm-2 control-label">Upload file</label>
+         <div class="col-sm-10">
+         
+            <input type="file" ng-model-file="updateImage" /> 
+            <img ng-src="{{ImageUrl}}" width="50" />
+         </div>
+       </div>
+       <div class="form-group">
+         <div class="col-sm-offset-2 col-sm-10">
+           <button type="submit" class="btn btn-primary">Update Product</button>
+         </div>
+       </div>
+</form>
+</div>
+ <div class="col-md-2"></div>
+</div>
 </div>
