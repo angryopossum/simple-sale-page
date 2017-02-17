@@ -46,6 +46,7 @@
 
     if (authData) {
        console.log("Logged in as:", authData.email);
+       $cookies.put("user", authData.email);
        
         } else {
           console.log("Logged out");
